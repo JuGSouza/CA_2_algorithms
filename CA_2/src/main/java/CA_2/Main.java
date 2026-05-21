@@ -90,4 +90,100 @@ public class Main {
             k++;
         }
     }
+  public static Employee binarySearch(ArrayList<Employee> list, String target, int left, int right) {
+
+        if (left > right) {
+            return null;
+        }
+
+        int middle = (left + right) / 2;
+
+        Employee middleEmployee = list.get(middle);
+
+        int result = target.compareToIgnoreCase(middleEmployee.getName());
+
+        if (result == 0) {
+            return middleEmployee;
+        } else if (result < 0) {
+            return binarySearch(list, target, left, middle - 1);
+        } else {
+            return binarySearch(list, target, middle + 1, right);
+        }
+    }
+   public static void addEmployee(Scanner scanner) {
+
+        scanner.nextLine();
+
+        System.out.print("Enter employee name: ");
+        String name = scanner.nextLine();
+
+        System.out.println("\nChoose Manager Type:");
+        System.out.println("1. Manager");
+        System.out.println("2. Senior Manager");
+        System.out.println("3. Assistant Manager");
+        System.out.println("4. Team Lead");
+
+        System.out.print("Choose an option: ");
+        int managerChoice = scanner.nextInt();
+
+        String managerType;
+
+        switch (managerChoice) {
+            case 1:
+                managerType = "Manager";
+                break;
+            case 2:
+                managerType = "Senior Manager";
+                break;
+            case 3:
+                managerType = "Assistant Manager";
+                break;
+            case 4:
+                managerType = "Team Lead";
+                break;
+            default:
+                System.out.println("Invalid manager type.");
+                return;
+        }
+
+        System.out.println("\nChoose Department:");
+        System.out.println("1. IT Development");
+        System.out.println("2. HR");
+        System.out.println("3. Finance");
+        System.out.println("4. Sales");
+        System.out.println("5. Customer Service");
+
+        System.out.print("Choose an option: ");
+        int departmentChoice = scanner.nextInt();
+
+        String department;
+
+        switch (departmentChoice) {
+            case 1:
+                department = "IT Development";
+                break;
+            case 2:
+                department = "HR";
+                break;
+            case 3:
+                department = "Finance";
+                break;
+            case 4:
+                department = "Sales";
+                break;
+            case 5:
+                department = "Customer Service";
+                break;
+            default:
+                System.out.println("Invalid department.");
+                return;
+        }
+
+        Employee employee = new Employee(name, managerType, department);
+        employees.add(employee);
+
+        System.out.println("\nNew employee added successfully:");
+        System.out.println(employee);
+    }
+
 }
