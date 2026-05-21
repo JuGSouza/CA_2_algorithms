@@ -59,5 +59,35 @@ public class Main {
 
         merge(list, left, right);
     }
+ public static void merge(ArrayList<Employee> list, ArrayList<Employee> left, ArrayList<Employee> right) {
 
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while (i < left.size() && j < right.size()) {
+
+            if (left.get(i).getName().compareToIgnoreCase(right.get(j).getName()) <= 0) {
+                list.set(k, left.get(i));
+                i++;
+            } else {
+                list.set(k, right.get(j));
+                j++;
+            }
+
+            k++;
+        }
+
+        while (i < left.size()) {
+            list.set(k, left.get(i));
+            i++;
+            k++;
+        }
+
+        while (j < right.size()) {
+            list.set(k, right.get(j));
+            j++;
+            k++;
+        }
+    }
 }
