@@ -1,5 +1,10 @@
 package CA_2;
 
+import static CA_2.MenuOption.ADD_RECORD;
+import static CA_2.MenuOption.CREATE_TREE;
+import static CA_2.MenuOption.EXIT;
+import static CA_2.MenuOption.SEARCH;
+import static CA_2.MenuOption.SORT;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -194,4 +199,103 @@ public class Main {
         System.out.println("5. Exit");
         System.out.print("Choose an option: ");
     }
+ public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        addStartingEmployees();
+
+        boolean running = true;
+
+        while (running) {
+
+            showMenu();
+
+            int choice = scanner.nextInt();
+
+            MenuOption option;
+
+            switch (choice) {
+                case 1:
+                    option = MenuOption.SORT;
+                    break;
+                case 2:
+                    option = MenuOption.SEARCH;
+                    break;
+                case 3:
+                    option = MenuOption.ADD_RECORD;
+                    break;
+                case 4:
+                    option = MenuOption.CREATE_TREE;
+                    break;
+                case 5:
+                    option = MenuOption.EXIT;
+                    break;
+                default:
+                    System.out.println("Invalid option.");
+                    continue;
+            }
+
+            switch (option) {
+
+                case SORT:
+                    mergeSort(employees);
+
+                    System.out.println("\nFirst 20 employees in alphabetical order:");
+
+                    for (int i = 0; i < employees.size() && i < 20; i++) {
+                        System.out.println(employees.get(i));
+                    }
+
+                    break;
+
+                case SEARCH:
+                    scanner.nextLine();
+
+                    mergeSort(employees);
+
+                    System.out.print("Enter employee name to search: ");
+                    String name = scanner.nextLine();
+
+                    Employee found = binarySearch(employees, name, 0, employees.size() - 1);
+
+                    if (found != null) {
+                        System.out.println("\nEmployee found:");
+                        System.out.println(found);
+                    } else {
+                        System.out.println("\nEmployee not found.");
+                    }
+
+                    break;
+
+                case ADD_RECORD:
+                    addEmployee(scanner);
+                    break;
+
+                case CREATE_TREE:
+                    tree = new BinaryTree();
+
+                    for (Employee employee : employees) {
+                        tree.insert(employee);
+                    }
+
+                    System.out.println("\nEmployee hierarchy - Level Order:");
+
+                    tree.displayLevelOrder();
+
+                    System.out.println("\nTree height: " + tree.getHeight(tree.root));
+                    System.out.println("Total node count: " + tree.countNodes(tree.root));
+
+                    break;
+
+                case EXIT:
+                    running = false;
+                    System.out.println("Program finished.");
+                    break;
+            }
+        }
+
+        scanner.close();
+    }
+
 }
