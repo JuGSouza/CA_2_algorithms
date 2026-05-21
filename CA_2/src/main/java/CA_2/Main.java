@@ -185,5 +185,13 @@ public class Main {
         System.out.println("\nNew employee added successfully:");
         System.out.println(employee);
     }
-
+ public static void showMenu() {
+        System.out.println("\n=== Department Store Employee System ===");
+        System.out.println("1. Sort employees");
+        System.out.println("2. Search employee");
+        System.out.println("3. Add new employee");
+        System.out.println("4. Create employee hierarchy using Binary Tree");
+        System.out.println("5. Exit");
+        System.out.print("Choose an option: ");
+    }
 }
